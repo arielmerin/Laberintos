@@ -14,7 +14,8 @@ Un programa, que dados dos números enteros positivos construye un laberinto de 
 
 
 ## Materia
-<h2> Estructuras de Datos</h2>
+<h3> Estructuras de Datos</h3>
+
 Grupo | Semestre
 ------|----------
 7030  | 2020-2
