@@ -2,7 +2,6 @@ package com.mx.edd;
 
 import java.io.*;
 import java.util.Random;
-import java.util.Scanner;
 
 /**
  * Programa que muestra la salida mas rapida de un laberinto (si la hay).
@@ -50,7 +49,7 @@ public class LaberintoCola {
         Random r = new Random();
         for (int i = 0; i < ancho; i++)
             for (int j = 0; j < largo; j++) {
-                paredes[i][j] = r.nextInt(16);
+                paredes[i][j] = r.nextInt(5);
                 camino[i][j] = 0;
             }
     }
@@ -128,10 +127,10 @@ public class LaberintoCola {
         return ruta;
     }
 
-    /*
+    /**
      * Metodo para etiquetar los vecinos.
-     * @param Punto -- punto del cual se marcaran los vecinos
-     * @param Cola -- cola que guardara los vecinos pendientes de marcado
+     * @param p -- punto del cual se marcaran los vecinos
+     * @param cola -- cola que guardara los vecinos pendientes de marcado
      * @return boolean -- true si encuentra la salida y false en otro caso.
      */
     private boolean etiquetarVecinos(Punto p, Cola cola) {
@@ -191,7 +190,7 @@ public class LaberintoCola {
      */
     public static void main (String [] pps) {
         try{
-            LaberintoCola mundo = new LaberintoCola(16,56,1,1,1,2);
+            LaberintoCola mundo = new LaberintoCola(5,5,1,1,2,2);
             mundo.encontrarSalida();
         }catch(IOException e) { }
     }
