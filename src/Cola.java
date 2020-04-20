@@ -1,17 +1,15 @@
-package com.mx.edd;
-
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * <p> Clase concreta para modelar la estructura de datos Pila</p>
- * <p>Esta clase implementa una Pila genérica, es decir que es homogénea pero
+ * <p> Clase concreta para modelar la estructura de datos Cola</p>
+ * <p>Esta clase implementa una Cola genérica, es decir que es homogénea pero
  * puede tener elementos de cualquier tipo.
- * @author Kevin Ariel Merino <arielmerino@ciencias.unam.mx>
+ * @author Kevin Ariel Merino Peña <arielmerino@ciencias.unam.mx>
  * @version 1.0
- * @param <T> Tipo que tienen los objetos que guarda esta pila.
+ * @param <T> Tipo que tienen los objetos que guarda esta cola.
  */
-public class Pila<T> implements Coleccionable<T> {
+public class Cola<T> implements Coleccionable<T> {
 
     private class Nodo {
 
@@ -34,12 +32,11 @@ public class Pila<T> implements Coleccionable<T> {
         }
     }
 
-    private class IteradorPila implements Iterator<T> {
-
+    private class IteradorCola implements Iterator<T> {
         public Nodo siguiente;
 
-        public IteradorPila() {
-            siguiente = tope;
+        public IteradorCola() {
+            siguiente = inicio;
         }
 
         /* Nos dice si hay un elemento siguiente. */
@@ -62,116 +59,112 @@ public class Pila<T> implements Coleccionable<T> {
         }
 
     }
-    private Nodo tope;
+
+    /* Nodo inicial de la cola*/
+    private Nodo inicio;
+    /* Nodo final de la cola*/
+    private Nodo rabo;
+    /* Tamaño de la cola*/
     private int elementos;
 
+
     /**
-     * Constructor por omisión de la clase;
+     * Constructor por omisión de la clase.
      */
-    public Pila() {
+    public Cola() {
+        //Aqui no hay que hacer nada, 
+        //ya que los valores por default nos sirven al crear un objeto.
     }
 
     /**
      * Constructor que recibe un arreglo de elementos de tipo <code>T</code>.
-     * Crea una pila donde el primer elemento del arreglo es el que queda al
-     * fondo de la pila, el último elemento del arreglo queda en el tope
-     * de la pila.
-     * @param elementos
+     * Crea una cola con los elementos del arreglo.
+     *
+     * @param elementos El arreglo que se recibe como parámetro.
      */
-    public Pila(T[] elementos) {
-        for(T elem: elementos){
-            this.agrega(elem);
-        }
-    }
-
-    /**
-     * Constructor que recibe una colección de tipo {@link Coleccionable}
-     * de elementos de tipo <code>T</code>.
-     * Crea una pila donde el primer elemento de la colección es el que queda al
-     * fondo de la pila, el último elemento de la colección queda en el tope
-     * de la pila.
-     * @param elementos La colección de elementos a agregar.
-     */
-    public Pila(Coleccionable<T> elementos) {
+    public Cola(T[] elementos) {
         for (T elem: elementos){
             this.agrega(elem);
         }
     }
 
+
     /**
-     * Constructor de la clase, que recibe una pila y regresa una copia
-     * exacta de ésta.
+     * Constructor que recibe una colección de tipo {@link Coleccionable}
+     * de elementos de tipo <code>T</code> y los agrega a la nueva cola.
      *
-     * @param pila La pila que se va a copiar.
+     * @param elementos La colección de elementos a agregar.
      */
-    public Pila(Pila<T> pila){
-        Pila<T> tmp = new Pila<>((Coleccionable<T>) pila);
-        for (T elem: tmp){
-            this.agrega(elem);
+    public Cola(Coleccionable<T> elementos) {
+        for (T col : elementos){
+            this.agrega(col);
         }
     }
 
     /**
-     * Agrega un elemento al tope de la pila.
+     * Agrega un elemento en el rabo de la Cola.
+     *
      * @param elemento el elemento a agregar.
      * @throws IllegalArgumentException si <code>elemento</code> es
-     * <code>null</code>.
+     *                                  <code>null</code>.
      */
-    public void push(T elemento) throws IllegalArgumentException {
+    public void queue(T elemento) throws IllegalArgumentException {
         if (elemento == null){
             throw  new IllegalArgumentException("El elemento enviado es nulo");
         }
         Nodo nuevo = new Nodo(elemento);
         if (esVacio()){
-            tope = nuevo;
-        }else{
-            nuevo.siguiente = tope;
-            tope = nuevo;
+            inicio = rabo = nuevo;
+        }else {
+            rabo.siguiente = nuevo;
+            rabo = nuevo;
         }
         elementos++;
     }
 
     /**
-     * Elimina el elemento del tope de la pila y lo regresa.
-     * @throws NoSuchElementException si la pila es vacía.
-     * @return el elemento en el tope de la pila.
+     * Elimina el elemento del inicio de la Cola y lo regresa.
+     *
+     * @return el elemento en el inicio de la Cola.
+     * @throws NoSuchElementException si la cola es vacía
      */
-    public T pop() throws NoSuchElementException{
+    public T dequeue() throws NoSuchElementException {
         if (esVacio()){
-            throw new NoSuchElementException("La pila esta vacia");
+            throw new NoSuchElementException("La estructura esta vacia");
         }
-        T aux = tope.elemento;
-        tope = tope.siguiente;
+        T aux = inicio.elemento;
+        inicio = inicio.siguiente;
         elementos--;
         return aux;
     }
 
     /**
-     * Nos permite ver el elemento en el tope de la pila
+     * Nos permite ver el elemento en el inicio de la Cola
      *
      * @return el elemento en un extremo de la estructura.
      */
     public T peek() {
-        return tope.elemento;
+        return inicio.elemento;
     }
 
     /**
-     * Agrega un elemento a la pila.
+     * Agrega un elemento a la Cola.
+     *
      * @param elemento el elemento a agregar.
      * @throws IllegalArgumentException si <code>elemento</code> es
-     * <code>null</code>.
+     *                                  <code>null</code>.
      */
     @Override
-    public void agrega(T elemento) throws IllegalArgumentException{
-        push(elemento);
+    public void agrega(T elemento) throws IllegalArgumentException {
+        queue(elemento);
     }
 
     /**
-     * Nos dice si un elemento está contenido en la pila.
+     * Nos dice si un elemento está contenido en la Cola.
      *
      * @param elemento el elemento que queremos verificar si está contenido en
-     * la pila.
-     * @return <code>true</code> si el elemento está contenido en la pila,
+     *                 la Cola.
+     * @return <code>true</code> si el elemento está contenido en la Cola,
      * <code>false</code> en otro caso.
      */
     @Override
@@ -186,19 +179,20 @@ public class Pila<T> implements Coleccionable<T> {
     }
 
     /**
-     * Elimina un elemento de la pila.
-     * @throws NoSuchElementException si la pila es vacía.
+     * Elimina un elemento de la Cola.
+     *
      * @param elemento el elemento a eliminar.
+     * @throws NoSuchElementException si la cola es vacía
      */
     @Override
-    public void elimina(T elemento) throws NoSuchElementException{
-        pop();
+    public void elimina(T elemento) throws NoSuchElementException {
+        dequeue();
     }
 
     /**
-     * Nos dice si la pila está vacía.
+     * Nos dice si la Cola está vacía.
      *
-     * @return <tt>true</tt> si la pila no tiene elementos,
+     * @return <tt>true</tt> si la Cola no tiene elementos,
      * <tt>false</tt> en otro caso.
      */
     @Override
@@ -207,9 +201,9 @@ public class Pila<T> implements Coleccionable<T> {
     }
 
     /**
-     * Regresa el número de elementos en la pila.
+     * Regresa el número de elementos en la Cola.
      *
-     * @return el número de elementos en la pila.
+     * @return el número de elementos en la Cola.
      */
     @Override
     public int getTamanio() {
@@ -218,13 +212,13 @@ public class Pila<T> implements Coleccionable<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new IteradorPila();
+        return new IteradorCola();
     }
 
     @Override
     public String toString() {
         String s = "[";
-        Nodo n = this.tope;
+        Nodo n = this.inicio;
         while (n != null) {
             if (n.siguiente == null) {
                 s += n.elemento;
@@ -235,5 +229,7 @@ public class Pila<T> implements Coleccionable<T> {
         }
         s += "]";
         return s;
+
     }
+
 }

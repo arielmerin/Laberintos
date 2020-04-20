@@ -1,5 +1,3 @@
-package com.mx.edd;
-
 import java.util.NoSuchElementException;
 
 /**
