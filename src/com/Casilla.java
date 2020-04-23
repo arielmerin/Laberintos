@@ -58,6 +58,11 @@ public class Casilla {
     private Casilla vecinoArriba;
 
     /**
+     * Valor que permite daber la reerencia al objeto que se empleo para la solucion en BFS
+     */
+    private Casilla quienMeEncolo;
+
+    /**
      * En este constrcutor se ponen los valores minimos para crear una casilla.
      */
     public Casilla(int posicionX, int posicionY){

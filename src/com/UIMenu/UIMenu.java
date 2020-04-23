@@ -23,9 +23,13 @@ public class UIMenu {
     public static void principal(){
         System.out.println(":.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.");
         System.out.println("BIENIDX A los laberitos");
+        System.out.println("Este programa genera (con la opcion 3) laberintos de 30 x 30 mostrando la solucion, \ntambien" +
+                " puedes asignar el tamaño que gustes (mayor estricto a 1 en ambos valores) y las casillas de inicio y fin");
+
         boolean primeraPregunta = true;
         do {
             System.out.println("[2] Para ingresar valores del laberinto");
+            System.out.println("[3] Para generar automaticamente el laberinto");
             System.out.println("[5] Para salir del programa");
             int respuesta = getInt("Seleccione una opcion: ", "Error, ingrese una opcion valida");
             switch (respuesta){
@@ -41,6 +45,14 @@ public class UIMenu {
                      * Mando's code
                      */
                     break;
+                case 3:
+                    Laberinto laberinto1 = new Laberinto(30,30);
+                    laberinto1.crearLaberinto();
+                    laberinto1.printStringGrid();
+                    System.out.println(" La solucion es  la siguiente");
+                    /**
+                     * Mando's code
+                     */
                 case 5:
                     System.out.println("Hasta luego ");
                     primeraPregunta = false;
