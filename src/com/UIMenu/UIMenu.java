@@ -38,9 +38,13 @@ public class UIMenu {
                     int n = getInt("Ingrese el valor del largo, debe ser mayor que 1 ", "Error, ingrese un valor valido");
                     int m = getInt("Ingrese el valor del ancho, debe ser mayor que 1 ", "Error, ingrese un valor valido");
                     LaberintoCola laberintoCola = new LaberintoCola(n,m);
-                    laberintoCola.printStringGrid();
+                    System.out.format("Laberinto de dimension (%d,%d) sin solucion",n,m);
                     laberintoCola.crearLaberinto();
                     laberintoCola.printStringGrid();
+                    System.out.format("Laberinto de dimension (%d,%d) con solucion\n\n",n,m);
+                    /**
+                     * Mando's code
+                     */
                     break;
                 case 5:
                     System.out.println("Hasta luego ");
