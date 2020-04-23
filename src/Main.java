@@ -1,3 +1,4 @@
+import static com.UIMenu.UIMenu.principal;
 
 /**
  * <h1> Clase Main </h1>
@@ -11,13 +12,6 @@ public class Main {
      * @param args argumentos que se emplearan al correr el metodo desde la terminal
      */
     public static void main(String[] args) {
-
-        LaberintoCola laberintoCola = new LaberintoCola(10,10);
-
-        laberintoCola.printStringGrid();
-        laberintoCola.crearLaberinto();
-        laberintoCola.printStringGrid();
-
-
+        principal();
     }
 }

@@ -1,6 +1,9 @@
+package com;
+
+import com.util.ArregloDinamico;
 
 /**
- * <h1> Clase Casilla </h1>
+ * <h1> Clase com.Casilla </h1>
  * Es la clase principal que compone el proyecto, con base en esta clase se podran asignar valores y en un
  * futuro laberintos compuestos de casillas, es de suma importancia pues con estos objetos se modelara
  *  el comportamiento de cada lugar disponible o no en el juego principal.
