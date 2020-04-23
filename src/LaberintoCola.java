@@ -1,18 +1,39 @@
 import java.util.Random;
 
 /**
- * Programa que muestra la salida mas rapida de un laberinto (si la hay).
- * Utiliza una cola,
- * @author ALG
- * @version 1a. ed.
+ * Programa que muestra un laberinto y la solucion a este, asegurando que siempre habra una
+ * @author Ariel Merino, Armando Aquino
+ * @version 1
  */
 public class LaberintoCola {
-    private int largo;              //Dimensiones del laberinto
+    /**
+     * Dimension largo que tendra el arreglo bidimensional del que constara el laberinto
+     */
+    private int largo;
+    /**
+     * Dimension ancho que tendra el arreglo bidimensional del que constara el laberinto
+     */
     private int ancho;
-    private Casilla inicio, fin;      //Casilla de entrada y de salida del laberinto
-    public Casilla [][] casillas;       // Laberinto
-    private int [][] camino;        // Matriz de marcado de celdas
+    /**
+     * Casillas de inicio y final que necesitara para encontrar una salida
+     */
+    private Casilla inicio, fin;
+    /**
+     * Arreglo bidimensional compuesto por casillas que representa el tablero del laberinto
+     */
+    public Casilla [][] casillas;
+    /**
+     * Es la trayectoria que marca el camino para resolver dicho laberinto
+     */
+    private int [][] camino;
 
+    /**
+     * <h1> Constructor escencial </h1>
+     * para la consolidacion de adyacencias y realciones entre casillas del laberinto
+     * se encarga de hacer que en un principio todas las casillas sean adyacentes y
+     * @param largo dimension del arreglo
+     * @param ancho segunda dimension del arreglo
+     */
     public LaberintoCola(int largo, int ancho){
         this.ancho = ancho;
         this.largo = largo;
@@ -35,9 +56,7 @@ public class LaberintoCola {
              * Con esto estoy diciendo que "ya visisto el vecino de arriba
              */
             casillas[0][j].configuraleElVecino(0);
-
         }
-
         /**
          * Con esto le digo a la ultima fila que su vecino de arriba es el que tienen arriba jeje
          */
@@ -48,7 +67,6 @@ public class LaberintoCola {
              */
             casillas[largo-1][j].configuraleElVecino(2);
         }
-
         for (int i = 0; i < largo; i++) {
             /**
              * Con esto le digo que su vecino es el de la derecha a la primera columna
@@ -59,7 +77,6 @@ public class LaberintoCola {
              */
             casillas[i][0].configuraleElVecino(3);
         }
-
         for (int i = 0; i < largo; i++) {
             /**
              * Con esto digo que su vecino es el interior
@@ -79,7 +96,6 @@ public class LaberintoCola {
                 casillas[i][j].setBecinoDerecho(casillas[i][j+1]);
             }
         }
-
         for (int i = 1; i < largo - 1; i++) {
             for (int j = 0; j < ancho; j++) {
                 casillas[i][j].setBecinoArriba(casillas[i-1][j]);
@@ -89,9 +105,13 @@ public class LaberintoCola {
 
     }
 
-
+    /**
+     * <h1>Impresion de un laberinto</h1>
+     * Este metodo se encarga de darle vida a las adyacencias y formatos de las casillas
+     * itera sobre cada una de las casillas para recopilar sus datos y si alguna de ellas son
+     * vecinas entonces pone una linea en la terminal.
+     */
     public void printStringGrid(){
-
         System.out.println();
         for (int j = 0; j < casillas[0].length ; j++) {
             boolean[] primeraLinea = casillas[0][j].getParedes();
@@ -102,7 +122,6 @@ public class LaberintoCola {
             }
         }
         System.out.println();
-
         for (int i = 0; i <casillas.length ; i++) {
             if (casillas[i][0].tieneParedIzquierda()){
                 System.out.print("|");
@@ -128,24 +147,22 @@ public class LaberintoCola {
                 }
             }
             System.out.println();
-
         }
-
     }
 
-
-
+    /**
+     * <h1>Creacion de un laberinto</h1>
+     * En este metodo se toma en cuenta una cuadricula aleatoria del arreglo bidimensional para que apartir de esta
+     * eleccion se tengan caminos adyacentes entre si y se descubran algunas casillas, dando lugar a un laberinto
+     * que siempre tendra solucion para cualesquiera dos puntos
+     */
     public void crearLaberinto() {
-        /**
-         * Objetos necesarios
-         */
         Random ran = new Random();
         Pila<Casilla> pila = new Pila();
 
         int aleatorio = ran.nextInt(ancho);
 
         pila.push(casillas[1][aleatorio]);
-        int rec = 0;
         int i = 0;
         casillas[1][aleatorio].setEstado(true);
 
