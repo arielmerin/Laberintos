@@ -28,10 +28,7 @@ public class Laberinto {
      * Arreglo bidimensional compuesto por casillas que representa el tablero del laberinto
      */
     public Casilla [][] casillas;
-    /**
-     * Es la trayectoria que marca el camino para resolver dicho laberinto
-     */
-    private int [][] camino;
+
 
     /**
      * <h1> Constructor escencial </h1>
@@ -189,10 +186,16 @@ public class Laberinto {
         }
     }
 
+    /**
+     * <h1> Solucion al laberinto </h1>
+     * Se encarga de marcar una trayectoria entre dos casillas dadas para mostrar que hay una solucion al laberinto con
+     * dichos valores, hace uso de Colas para su implementacion
+     * @param inicio Casilla donde de iniciara el recorrido
+     * @param fin Casilla donde se termina el recorrido
+     */
     public void hallarSolucion(Casilla inicio, Casilla fin){
         Cola<Casilla> cola = new Cola<>();
         Cola<Casilla> fueronEncolados = new Cola<>();
-
         cola.queue(inicio);
         fueronEncolados.queue(inicio);
         Casilla posicion = cola.peek();
@@ -201,7 +204,6 @@ public class Laberinto {
             posicion.setEstado(false);
             boolean[] paredes = posicion.getParedes();
             for (int i = 0; i < 4; i++) {
-
                 if (!paredes[i] && posicion.dameVecino(i).getEstado()){
                     Casilla nuevo = posicion.dameVecino(i);
                     if (nuevo.getEstado()){
@@ -213,18 +215,14 @@ public class Laberinto {
                     nuevo.setEstado(false);
                 }
             }
-
             if (posicion.vecinosDisponiblesMod().getElementos() == 0){
                 cola.dequeue();
             }
         }
-
         int i = 0;
         while (posicion != null){
             posicion.setOrden(++i);
             posicion = posicion.getQuienMeEncolo();
         }
-
     }
-
 }

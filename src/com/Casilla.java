@@ -80,7 +80,6 @@ public class Casilla {
         }
     }
 
-
     /**
      * Indica que esta pared esta libre y si lo esta es que se puede pasar de esa casilla a la otra,
      * es decir tiene la propiedad de ser "recorrible" en dicha direccion
@@ -287,6 +286,11 @@ public class Casilla {
         return disponibles;
     }
 
+    /**
+     * Hace la diferencia bajo el criterio de disponibilidad constrastandolo con el de tener paredes libres para
+     * mosrar cuales son las casillas que tienen libre el paso
+     * @return casillas adyacentes disponibles
+     */
     public ArregloDinamico<Integer> vecinosDisponiblesMod(){
         ArregloDinamico<Integer> disponibles = new ArregloDinamico<>();
         for (int i = 0; i < 4; i++) {
@@ -297,24 +301,14 @@ public class Casilla {
         return disponibles;
     }
 
-    public boolean[] vecinoDisponible(){
-        boolean[] disponibles = new boolean[4];
-        for (int i = 0; i < 4; i++) {
-            if (vecinos[i] && !paredes[i]){
-                disponibles[i] = true;
-            }
-        }
-        return disponibles;
-    }
 
-
-
+    /**
+     * Permite modificar el valor de la casilla que ha encolado (metido en la estructura de datos) a nuestr variable en
+     * cuestion
+     * @param quienMeEncolo Referencia a la casilla que se evaluo antes en el proceso de solucion
+     */
     public void setQuienMeEncolo(Casilla quienMeEncolo) {
         this.quienMeEncolo = quienMeEncolo;
-    }
-
-    public void imprimePosicion(){
-        System.out.format("(%d,%d)\n",posicionX,posicionY);
     }
 
     @Override
@@ -330,10 +324,18 @@ public class Casilla {
         return Objects.hash(posicionX, posicionY);
     }
 
+    /**
+     * Sirve para acceder al valor del objeto que en el proceso de solucion al laberinto ha encolado a dicha casilla
+     * @return Casilla anterior en la trayectoria
+     */
     public Casilla getQuienMeEncolo() {
         return quienMeEncolo;
     }
 
+    /**
+     * Permite modificar el orden en el que se dio la trayectoria para conectar la solucion, es util si se llegase a requerir
+     * @param orden valor en el que se fue agregando
+     */
     public void setOrden(int orden) {
         this.orden = orden;
     }
