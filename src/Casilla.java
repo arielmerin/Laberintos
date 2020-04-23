@@ -157,7 +157,7 @@ public class Casilla {
 
     @Override
     public String toString() {
-        return estado? " X ": "   ";
+        return !estado? " X ": "   ";
     }
 
     public void setEstado(boolean estado){

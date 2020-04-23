@@ -64,7 +64,7 @@ public class LaberintoCola {
             /**
              * Con esto digo que su vecino es el interior
              */
-            casillas[i][ancho-1].setBecinoIzquierdo(casillas[i][largo-2]);
+            casillas[i][ancho-1].setBecinoIzquierdo(casillas[i][ancho-2]);
             /**
              * Con esto digo que ya vio a su vecino el de la derecha
              */
@@ -144,43 +144,29 @@ public class LaberintoCola {
 
         int aleatorio = ran.nextInt(ancho);
 
-        System.out.println("Esta es la casilla donde empezara (" + 1 + ", " + aleatorio + ")");
-
         pila.push(casillas[1][aleatorio]);
         int rec = 0;
         int i = 0;
         casillas[1][aleatorio].setEstado(true);
 
         while (!pila.esVacio() ) {
-            printStringGrid();
             Casilla enCuestion = pila.peek();
-            System.out.println("Estos son los elementos en la pila " + pila);
-            System.out.print("Esta es su posicion: ");
-            enCuestion.imprimePosicion();
             enCuestion.setEstado(true);
-            System.out.println("Las posiciones que tiene disponibles" +enCuestion.vecinosDisponibles());
             if (enCuestion.vecinosDisponibles().getElementos() != 0){
                 i = ran.nextInt(4);
                 i = i % enCuestion.vecinosDisponibles().getElementos();
                 int k = enCuestion.vecinosDisponibles().busca(i);
-                System.out.println("La posicion en que se intentea " +k);
 
                 if (enCuestion.hayVecino(k)){
                     if (!enCuestion.hayVecinoOcupado(k)){
                         Casilla siguiente = enCuestion.dameVecino(k);
                         enCuestion.visitarVecino(k);
-                        System.out.println("Esta metiendo un elemento a la pila");
                         pila.push(siguiente);
                     }
                 }
             }else{
-                System.out.println("Entro al caso en el que ya no hay vecinos disponibles");
                 pila.pop();
-                System.out.println("El tamaño de la pila" +pila.getTamanio());
             }
-
-
-
 
         }
     }
