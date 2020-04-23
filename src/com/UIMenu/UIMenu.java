@@ -1,13 +1,8 @@
 package com.UIMenu;
 
-
-import com.LaberintoCola;
-
-import java.io.File;
-import java.util.Scanner;
+import com.Laberinto;
 
 import static com.util.Utilidades.getInt;
-import static com.util.Utilidades.getStr;
 
 /**
  * <h1>UI Menu</h1>
@@ -37,10 +32,10 @@ public class UIMenu {
                 case 2:
                     int n = getInt("Ingrese el valor del largo, debe ser mayor que 1 ", "Error, ingrese un valor valido");
                     int m = getInt("Ingrese el valor del ancho, debe ser mayor que 1 ", "Error, ingrese un valor valido");
-                    LaberintoCola laberintoCola = new LaberintoCola(n,m);
+                    Laberinto laberinto = new Laberinto(n,m);
                     System.out.format("Laberinto de dimension (%d,%d) sin solucion",n,m);
-                    laberintoCola.crearLaberinto();
-                    laberintoCola.printStringGrid();
+                    laberinto.crearLaberinto();
+                    laberinto.printStringGrid();
                     System.out.format("Laberinto de dimension (%d,%d) con solucion\n\n",n,m);
                     /**
                      * Mando's code
@@ -53,8 +48,6 @@ public class UIMenu {
                 default:
                     System.out.println("Ingrese una opcion valida");
             }
-
-
         }while (primeraPregunta);
 
     }

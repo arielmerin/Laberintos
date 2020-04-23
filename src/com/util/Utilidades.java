@@ -39,32 +39,4 @@ public class Utilidades {
         }while(conti);
         return entero;
     }
-
-    /**
-     * Este metodo se encarga de pedirle al usuario a traves de la terminal una cadena que sera modificada, se le
-     * reemplazaran todos los caracteres que no sean del alfabeto (ya sea minusculas o mayusculas) por el caracter vacio
-     * si llegara a ser el caso que solo se ingresar caracteres que no son los buscados entonces el metodos se seguira
-     * ejecutand pidiendole al usuario que vuelva a ingresar una cadena
-     *
-     * @param mensaje Donde se le solicita al usuario ingrese, se le dan instrucciones
-     * @param error aparece cuando la entrada no es valida
-     * @return cadena con valores validos para el programa
-     */
-    public static String getStr(String mensaje, String error){
-        Scanner sc = new Scanner(System.in);
-        String cadena = null;
-        boolean continuar = false;
-        do {
-            System.out.println(mensaje);
-            cadena = sc.nextLine().replaceAll("[^a-zA-ZÀ-ÿ\u00f1\u00d1 ]", "");
-            if (cadena.equals("")){
-                continuar = true;
-                System.out.println(error);
-            }else{
-                return cadena;
-            }
-        }while (continuar);
-        return cadena;
-    }
-
 }

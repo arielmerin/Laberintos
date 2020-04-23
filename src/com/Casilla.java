@@ -40,22 +40,22 @@ public class Casilla {
     /**
      * Referencia a la casilla que se encentra a la izquierda
      */
-    private Casilla becinoIzquierdo;
+    private Casilla vecinoIzquierdo;
 
     /**
      * Referencia a la casilla que se encentra a la derecha
      */
-    private Casilla becinoDerecho;
+    private Casilla vecinoDerecho;
 
     /**
      * Referencia a la casilla que se encentra hacia abajo
      */
-    private Casilla becinoAbajo;
+    private Casilla vecinoAbajo;
 
     /**
      * Referencia a la casilla que se encentra hacia arriba
      */
-    private Casilla becinoArriba;
+    private Casilla vecinoArriba;
 
     /**
      * En este constrcutor se ponen los valores minimos para crear una casilla.
@@ -86,24 +86,24 @@ public class Casilla {
         paredes[direccion] = false;
         switch (direccion){
             case 0:
-                becinoArriba.estado = true;
-                becinoArriba.vecinos[2] = false;
-                becinoArriba.paredes[2] = false;
+                vecinoArriba.estado = true;
+                vecinoArriba.vecinos[2] = false;
+                vecinoArriba.paredes[2] = false;
                 break;
             case 1:
-                becinoDerecho.estado = true;
-                becinoDerecho.paredes[3] = false;
-                becinoDerecho.vecinos[3] = false;
+                vecinoDerecho.estado = true;
+                vecinoDerecho.paredes[3] = false;
+                vecinoDerecho.vecinos[3] = false;
                 break;
             case 2:
-                becinoAbajo.estado = true;
-                becinoAbajo.paredes[0] = false;
-                becinoAbajo.vecinos[0] = false;
+                vecinoAbajo.estado = true;
+                vecinoAbajo.paredes[0] = false;
+                vecinoAbajo.vecinos[0] = false;
                 break;
             case 3:
-                becinoIzquierdo.estado = true;
-                becinoIzquierdo.paredes[1] = false;
-                becinoIzquierdo.vecinos[1] = false;
+                vecinoIzquierdo.estado = true;
+                vecinoIzquierdo.paredes[1] = false;
+                vecinoIzquierdo.vecinos[1] = false;
                 break;
         }
     }
@@ -142,31 +142,31 @@ public class Casilla {
      * Brinda la capacidad de asignar un vecino a cierto lado de la casilla
      * @param becinoIzquierdo vecino que sera asignado
      */
-    public void setBecinoIzquierdo(Casilla becinoIzquierdo) {
-        this.becinoIzquierdo = becinoIzquierdo;
+    public void setVecinoIzquierdo(Casilla becinoIzquierdo) {
+        this.vecinoIzquierdo = becinoIzquierdo;
     }
 
     /**
      * Brinda la capacidad de asignar un vecino a cierto lado de la casilla
      * @param becinoDerecho vecino que sera asignado
      */
-    public void setBecinoDerecho(Casilla becinoDerecho) {
-        this.becinoDerecho = becinoDerecho;
+    public void setVecinoDerecho(Casilla becinoDerecho) {
+        this.vecinoDerecho = becinoDerecho;
     }
     /**
      * Brinda la capacidad de asignar un vecino a cierto lado de la casilla
      * @param becinoAbajo vecino que sera asignado
      */
-    public void setBecinoAbajo(Casilla becinoAbajo) {
-        this.becinoAbajo = becinoAbajo;
+    public void setVecinoAbajo(Casilla becinoAbajo) {
+        this.vecinoAbajo = becinoAbajo;
     }
 
     /**
      * Brinda la capacidad de asignar un vecino a cierto lado de la casilla
      * @param becinoArriba vecino que sera asignado
      */
-    public void setBecinoArriba(Casilla becinoArriba) {
-        this.becinoArriba = becinoArriba;
+    public void setVecinoArriba(Casilla becinoArriba) {
+        this.vecinoArriba = becinoArriba;
     }
 
     /**
@@ -186,13 +186,13 @@ public class Casilla {
     public boolean hayVecino(int posicion){
          switch (posicion){
             case 0:
-                return becinoArriba != null;
+                return vecinoArriba != null;
             case 1:
-                return becinoDerecho != null;
+                return vecinoDerecho != null;
              case 2:
-                return becinoAbajo != null;
+                return vecinoAbajo != null;
              case 3:
-                 return becinoIzquierdo != null;
+                 return vecinoIzquierdo != null;
             default:
                 return false;
         }
@@ -207,13 +207,13 @@ public class Casilla {
     public boolean hayVecinoOcupado(int pos){
         switch (pos){
             case 0:
-                return becinoArriba.estado;
+                return vecinoArriba.estado;
             case 1:
-                return becinoDerecho.estado;
+                return vecinoDerecho.estado;
             case 2:
-                return becinoAbajo.estado;
+                return vecinoAbajo.estado;
             case 3:
-                return becinoIzquierdo.estado;
+                return vecinoIzquierdo.estado;
             default:
                 return false;
         }
@@ -227,13 +227,13 @@ public class Casilla {
     public Casilla dameVecino(int posicion){
         switch (posicion){
             case 0:
-                return becinoArriba;
+                return vecinoArriba;
             case 1:
-                return becinoDerecho;
+                return vecinoDerecho;
             case 2:
-                return becinoAbajo;
+                return vecinoAbajo;
             case 3:
-                return becinoIzquierdo;
+                return vecinoIzquierdo;
             default:
                 return null;
         }
@@ -257,16 +257,16 @@ public class Casilla {
         ArregloDinamico<Integer> disponibles = new ArregloDinamico<>();
         for (int i = 0; i < 4; i++) {
             if (vecinos[i]){
-                if (i == 0 && !becinoArriba.estado){
+                if (i == 0 && !vecinoArriba.estado){
                     disponibles.agrega(i);
                 }
-                if (i == 1 && !becinoDerecho.estado){
+                if (i == 1 && !vecinoDerecho.estado){
                     disponibles.agrega(i);
                 }
-                if (i == 2 && !becinoAbajo.estado){
+                if (i == 2 && !vecinoAbajo.estado){
                     disponibles.agrega(i);
                 }
-                if (i == 3 && !becinoIzquierdo.estado){
+                if (i == 3 && !vecinoIzquierdo.estado){
                     disponibles.agrega(i);
                 }
             }

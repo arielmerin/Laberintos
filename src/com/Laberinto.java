@@ -7,7 +7,7 @@ import java.util.Random;
  * @author Ariel Merino, Armando Aquino
  * @version 1
  */
-public class LaberintoCola {
+public class Laberinto {
     /**
      * Dimension largo que tendra el arreglo bidimensional del que constara el laberinto
      */
@@ -36,7 +36,7 @@ public class LaberintoCola {
      * @param largo dimension del arreglo
      * @param ancho segunda dimension del arreglo
      */
-    public LaberintoCola(int largo, int ancho){
+    public Laberinto(int largo, int ancho){
         this.ancho = ancho;
         this.largo = largo;
         casillas = new Casilla[largo][ancho];
@@ -53,7 +53,7 @@ public class LaberintoCola {
          * Le dice a la primera fila que su vecino de abajo es [1][j]
          */
         for (int j = 0; j < casillas[0].length; j++) {
-            casillas[0][j].setBecinoAbajo(casillas[1][j]);
+            casillas[0][j].setVecinoAbajo(casillas[1][j]);
             /**
              * Con esto estoy diciendo que "ya visisto el vecino de arriba
              */
@@ -63,7 +63,7 @@ public class LaberintoCola {
          * Con esto le digo a la ultima fila que su vecino de arriba es el que tienen arriba jeje
          */
         for (int j = 0; j < ancho; j++) {
-            casillas[largo-1][j].setBecinoArriba(casillas[largo-2][j]);
+            casillas[largo-1][j].setVecinoArriba(casillas[largo-2][j]);
             /**
              * Con esto decimos que ya visito al vecino de abajo
              */
@@ -73,7 +73,7 @@ public class LaberintoCola {
             /**
              * Con esto le digo que su vecino es el de la derecha a la primera columna
              */
-            casillas[i][0].setBecinoDerecho(casillas[i][1]);
+            casillas[i][0].setVecinoDerecho(casillas[i][1]);
             /**
              * Con esto digo que ya visito el vecino de la izquierda
              */
@@ -83,7 +83,7 @@ public class LaberintoCola {
             /**
              * Con esto digo que su vecino es el interior
              */
-            casillas[i][ancho-1].setBecinoIzquierdo(casillas[i][ancho-2]);
+            casillas[i][ancho-1].setVecinoIzquierdo(casillas[i][ancho-2]);
             /**
              * Con esto digo que ya vio a su vecino el de la derecha
              */
@@ -94,14 +94,14 @@ public class LaberintoCola {
          */
         for (int i = 0; i < largo; i++) {
             for (int j = 1; j < ancho -1; j++) {
-                casillas[i][j].setBecinoIzquierdo(casillas[i][j-1]);
-                casillas[i][j].setBecinoDerecho(casillas[i][j+1]);
+                casillas[i][j].setVecinoIzquierdo(casillas[i][j-1]);
+                casillas[i][j].setVecinoDerecho(casillas[i][j+1]);
             }
         }
         for (int i = 1; i < largo - 1; i++) {
             for (int j = 0; j < ancho; j++) {
-                casillas[i][j].setBecinoArriba(casillas[i-1][j]);
-                casillas[i][j].setBecinoAbajo(casillas[i+1][j]);
+                casillas[i][j].setVecinoArriba(casillas[i-1][j]);
+                casillas[i][j].setVecinoAbajo(casillas[i+1][j]);
             }
         }
 
@@ -161,13 +161,10 @@ public class LaberintoCola {
     public void crearLaberinto() {
         Random ran = new Random();
         Pila<Casilla> pila = new Pila();
-
         int aleatorio = ran.nextInt(ancho);
-
         pila.push(casillas[1][aleatorio]);
         int i = 0;
         casillas[1][aleatorio].setEstado(true);
-
         while (!pila.esVacio() ) {
             Casilla enCuestion = pila.peek();
             enCuestion.setEstado(true);
@@ -175,7 +172,6 @@ public class LaberintoCola {
                 i = ran.nextInt(4);
                 i = i % enCuestion.vecinosDisponibles().getElementos();
                 int k = enCuestion.vecinosDisponibles().busca(i);
-
                 if (enCuestion.hayVecino(k)){
                     if (!enCuestion.hayVecinoOcupado(k)){
                         Casilla siguiente = enCuestion.dameVecino(k);
