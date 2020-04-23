@@ -5,7 +5,7 @@ import com.util.ArregloDinamico;
 import java.util.Objects;
 
 /**
- * <h1> Clase com.Casilla </h1>
+ * <h1> Clase Casilla </h1>
  * Es la clase principal que compone el proyecto, con base en esta clase se podran asignar valores y en un
  * futuro laberintos compuestos de casillas, es de suma importancia pues con estos objetos se modelara
  *  el comportamiento de cada lugar disponible o no en el juego principal.
@@ -68,6 +68,8 @@ public class Casilla {
 
     /**
      * En este constrcutor se ponen los valores minimos para crear una casilla.
+     * @param posicionX coordenada en x de la casilla
+     * @param posicionY coordenada en y de la casilla
      */
     public Casilla(int posicionX, int posicionY){
         this.posicionX = posicionX;

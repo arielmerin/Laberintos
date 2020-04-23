@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
  * <p> Clase concreta para modelar la estructura de datos com.util.Pila</p>
  * <p>Esta clase implementa una com.util.Pila genérica, es decir que es homogénea pero
  * puede tener elementos de cualquier tipo.
- * @author Kevin Ariel Merino <arielmerino@ciencias.unam.mx>
+ * @author Kevin Ariel Merino arielmerino@ciencias.unam.mx
  * @version 1.0
  * @param <T> Tipo que tienen los objetos que guarda esta pila.
  */
@@ -76,7 +76,7 @@ public class Pila<T> implements Coleccionable<T> {
      * Crea una pila donde el primer elemento del arreglo es el que queda al
      * fondo de la pila, el último elemento del arreglo queda en el tope
      * de la pila.
-     * @param elementos
+     * @param elementos un arreglo que recibira como primera entrada
      */
     public Pila(T[] elementos) {
         for(T elem: elementos){

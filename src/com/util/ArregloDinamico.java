@@ -19,7 +19,7 @@ public class ArregloDinamico<T> implements Iterable<T> {
 
     /**
      * No importa el nombre que se le ponga a la clase, solo es para fines didácticos
-     * @param <T>
+     * @param <T> Tipo sobre el cual va a iterar
      */
     private class Iterador<T> implements Iterator<T> {
 
@@ -68,7 +68,7 @@ public class ArregloDinamico<T> implements Iterable<T> {
      * Constructor que recibe el tamaño con el cual queremos inicializar el
      * arreglo dinámico.
      *
-     * @param n
+     * @param n numero de elementos iniciales de un arreglo dinamico
      */
     public ArregloDinamico(int n) {
         this.arreglo = (T[])new Object[n];
@@ -82,7 +82,7 @@ public class ArregloDinamico<T> implements Iterable<T> {
      * Método para insertar un elemento al final del arreglo dinamico. Si el
      * arreglo no tiene espacio, crecer el arreglo al doble de tamaño.
      *
-     * @param elem
+     * @param elem elemento a agregar
      */
     public void agrega(T elem) {
         if (elementos == arreglo.length-1){
@@ -101,8 +101,8 @@ public class ArregloDinamico<T> implements Iterable<T> {
      * debe devolver el elemento buscado. Si no existe elemento n-esimo,
      * devolver null.
      *
-     * @param n
-     * @return
+     * @param n el enesimo elemento a buscar
+     * @return resultado de la extraccion
      */
     public T busca(int n) {
         if (n < elementos && arreglo[n] != null){
@@ -117,8 +117,8 @@ public class ArregloDinamico<T> implements Iterable<T> {
      * haber espacios sin elementos. El método debe devolver el elemento
      * eliminado. Si no existe elemento n-esimo, devolver null.
      *
-     * @param n
-     * @return
+     * @param n el valor a eliminar
+     * @return lo que contenia el lugar eliminado
      */
     public T elimina(int n) {
         T result = arreglo[n];
@@ -138,8 +138,8 @@ public class ArregloDinamico<T> implements Iterable<T> {
      * Método para saber si un elemento esta en el arreglo dinámico, devuelve
      * true si esta en el arreglo, false en otro caso.
      *
-     * @param elem
-     * @return
+     * @param elem elemento que se buscara
+     * @return resultado de la busqueda, verdadero en caso de haberlo encontrado
      */
     public boolean contiene(T elem) {
         for (int i = 0; i < elementos; i++){
@@ -200,11 +200,7 @@ public class ArregloDinamico<T> implements Iterable<T> {
         return new Iterador();
     }
 
-    /**
-     * Método para representar el arreglo en una cadena.
-     *
-     * @return
-     */
+
     @Override
     public String toString() {
         StringBuilder std = new StringBuilder();
