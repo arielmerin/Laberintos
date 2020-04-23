@@ -21,7 +21,7 @@ public class LaberintoCola {
         for (int i = 0; i < casillas.length ; i++) {
             for (int j = 0; j < casillas[0].length; j++) {
                 Random random = new Random();
-                casillas[i][j] = new Casilla(1,1,random.nextBoolean());
+                casillas[i][j] = new Casilla(1,1);
             }
         }
 
