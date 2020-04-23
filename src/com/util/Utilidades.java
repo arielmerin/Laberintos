@@ -29,7 +29,7 @@ public class Utilidades {
             if(scan.hasNextInt())
             {
                 entero = scan.nextInt();
-                if (entero > 1){
+                if (entero >= 0){
                     conti = false;
                 }
             }else{

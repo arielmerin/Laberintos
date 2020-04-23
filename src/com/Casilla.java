@@ -2,6 +2,8 @@ package com;
 
 import com.util.ArregloDinamico;
 
+import java.util.Objects;
+
 /**
  * <h1> Clase com.Casilla </h1>
  * Es la clase principal que compone el proyecto, con base en esta clase se podran asignar valores y en un
@@ -61,6 +63,8 @@ public class Casilla {
      * Valor que permite daber la reerencia al objeto que se empleo para la solucion en BFS
      */
     private Casilla quienMeEncolo;
+
+    private int orden;
 
     /**
      * En este constrcutor se ponen los valores minimos para crear una casilla.
@@ -132,7 +136,11 @@ public class Casilla {
 
     @Override
     public String toString() {
-        return !estado? " X ": "   ";
+        if (!estado && orden > 0){
+            return " X ";
+        }else {
+            return "   ";
+        }
     }
 
     /**
@@ -277,5 +285,56 @@ public class Casilla {
             }
         }
         return disponibles;
+    }
+
+    public ArregloDinamico<Integer> vecinosDisponiblesMod(){
+        ArregloDinamico<Integer> disponibles = new ArregloDinamico<>();
+        for (int i = 0; i < 4; i++) {
+            if (vecinos[i] && !paredes[i]){
+                disponibles.agrega(i);
+            }
+        }
+        return disponibles;
+    }
+
+    public boolean[] vecinoDisponible(){
+        boolean[] disponibles = new boolean[4];
+        for (int i = 0; i < 4; i++) {
+            if (vecinos[i] && !paredes[i]){
+                disponibles[i] = true;
+            }
+        }
+        return disponibles;
+    }
+
+
+
+    public void setQuienMeEncolo(Casilla quienMeEncolo) {
+        this.quienMeEncolo = quienMeEncolo;
+    }
+
+    public void imprimePosicion(){
+        System.out.format("(%d,%d)\n",posicionX,posicionY);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Casilla casilla = (Casilla) o;
+        return posicionX == casilla.posicionX &&
+                posicionY == casilla.posicionY;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(posicionX, posicionY);
+    }
+
+    public Casilla getQuienMeEncolo() {
+        return quienMeEncolo;
+    }
+
+    public void setOrden(int orden) {
+        this.orden = orden;
     }
 }

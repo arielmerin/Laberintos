@@ -1,13 +1,11 @@
-package com;
-
-import com.util.Coleccionable;
+package com.util;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * <p> Clase concreta para modelar la estructura de datos com.Pila</p>
- * <p>Esta clase implementa una com.Pila genérica, es decir que es homogénea pero
+ * <p> Clase concreta para modelar la estructura de datos com.util.Pila</p>
+ * <p>Esta clase implementa una com.util.Pila genérica, es decir que es homogénea pero
  * puede tener elementos de cualquier tipo.
  * @author Kevin Ariel Merino <arielmerino@ciencias.unam.mx>
  * @version 1.0

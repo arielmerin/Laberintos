@@ -1,5 +1,9 @@
 package com;
 
+import com.util.ArregloDinamico;
+import com.util.Cola;
+import com.util.Pila;
+
 import java.util.Random;
 
 /**
@@ -168,21 +172,59 @@ public class Laberinto {
         while (!pila.esVacio() ) {
             Casilla enCuestion = pila.peek();
             enCuestion.setEstado(true);
-            if (enCuestion.vecinosDisponibles().getElementos() != 0){
+            if (enCuestion.vecinosDisponibles().getElementos() != 0) {
                 i = ran.nextInt(4);
                 i = i % enCuestion.vecinosDisponibles().getElementos();
                 int k = enCuestion.vecinosDisponibles().busca(i);
-                if (enCuestion.hayVecino(k)){
-                    if (!enCuestion.hayVecinoOcupado(k)){
+                if (enCuestion.hayVecino(k)) {
+                    if (!enCuestion.hayVecinoOcupado(k)) {
                         Casilla siguiente = enCuestion.dameVecino(k);
                         enCuestion.visitarVecino(k);
                         pila.push(siguiente);
                     }
                 }
-            }else{
+            } else {
                 pila.pop();
             }
-
         }
     }
+
+    public void hallarSolucion(Casilla inicio, Casilla fin){
+        Cola<Casilla> cola = new Cola<>();
+        Cola<Casilla> fueronEncolados = new Cola<>();
+
+        cola.queue(inicio);
+        fueronEncolados.queue(inicio);
+        Casilla posicion = cola.peek();
+        while (!posicion.equals(fin) ){
+            posicion = cola.peek();
+            posicion.setEstado(false);
+            boolean[] paredes = posicion.getParedes();
+            for (int i = 0; i < 4; i++) {
+
+                if (!paredes[i] && posicion.dameVecino(i).getEstado()){
+                    Casilla nuevo = posicion.dameVecino(i);
+                    if (nuevo.getEstado()){
+                        if (!fueronEncolados.contiene(nuevo))
+                        cola.queue(nuevo);
+                        fueronEncolados.queue(nuevo);
+                    }
+                    nuevo.setQuienMeEncolo(posicion);
+                    nuevo.setEstado(false);
+                }
+            }
+
+            if (posicion.vecinosDisponiblesMod().getElementos() == 0){
+                cola.dequeue();
+            }
+        }
+
+        int i = 0;
+        while (posicion != null){
+            posicion.setOrden(++i);
+            posicion = posicion.getQuienMeEncolo();
+        }
+
+    }
+
 }
