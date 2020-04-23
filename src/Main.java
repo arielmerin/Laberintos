@@ -11,9 +11,10 @@ public class Main {
         //laberintoCola.casillas[1][0].vecinoVisitado(1);
         //laberintoCola.casillas[1][0].vecinoVisitado(0);
         //laberintoCola.casillas[1][0].vecinoVisitado(2);
-        laberintoCola.casillas[2][2].setEstado(true);
-        laberintoCola.casillas[2][2].visitarVecino(0);
-        laberintoCola.casillas[2][2].visitarVecino(3);
+        //laberintoCola.casillas[2][2].setEstado(true);
+        //System.out.println(laberintoCola.casillas[2][2].vecinosDisponibles());
+        //laberintoCola.casillas[2][2].visitarVecino(0);
+        //laberintoCola.casillas[2][2].visitarVecino(3);
         //System.out.println(laberintoCola.casillas[2][2].hayVecinosSinVisitar());
         //System.out.println(laberintoCola.casillas[4][2].vecinosDisponibles());
 

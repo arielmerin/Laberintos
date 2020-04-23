@@ -149,35 +149,38 @@ public class LaberintoCola {
         pila.push(casillas[1][aleatorio]);
         int rec = 0;
         int i = 0;
-        Pila<Casilla> visitadas = new Pila<>();
-        visitadas.push(casillas[1][aleatorio]);
         casillas[1][aleatorio].setEstado(true);
 
-        while (!pila.esVacio()) {
+        while (!pila.esVacio() ) {
+            printStringGrid();
             Casilla enCuestion = pila.peek();
-            System.out.println(pila);
+            System.out.println("Estos son los elementos en la pila " + pila);
+            System.out.print("Esta es su posicion: ");
             enCuestion.imprimePosicion();
             enCuestion.setEstado(true);
+            System.out.println("Las posiciones que tiene disponibles" +enCuestion.vecinosDisponibles());
+            if (enCuestion.vecinosDisponibles().getElementos() != 0){
+                i = ran.nextInt(4);
+                i = i % enCuestion.vecinosDisponibles().getElementos();
+                int k = enCuestion.vecinosDisponibles().busca(i);
+                System.out.println("La posicion en que se intentea " +k);
 
-            i = ran.nextInt(4);
-            System.out.println(enCuestion.vecinosDisponibles());
-            System.out.println(i);
-
-            if (enCuestion.hayVecino(i)){
-
-                Casilla siguiente = enCuestion.dameVecino(i);
-                enCuestion.visitarVecino(i);
-                    pila.push(siguiente);
-                    System.out.println("Esta metiendo un elemento a la pila");
-                
-            }
-
-
-            if (!enCuestion.hayVecinosSinVisitar()) {
-                System.out.println("Aqui se complio la condicion");
+                if (enCuestion.hayVecino(k)){
+                    if (!enCuestion.hayVecinoOcupado(k)){
+                        Casilla siguiente = enCuestion.dameVecino(k);
+                        enCuestion.visitarVecino(k);
+                        System.out.println("Esta metiendo un elemento a la pila");
+                        pila.push(siguiente);
+                    }
+                }
+            }else{
+                System.out.println("Entro al caso en el que ya no hay vecinos disponibles");
                 pila.pop();
+                System.out.println("El tamaño de la pila" +pila.getTamanio());
             }
-            System.out.println(pila.getTamanio());
+
+
+
 
         }
     }

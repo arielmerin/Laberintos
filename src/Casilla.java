@@ -42,10 +42,11 @@ public class Casilla {
         this.posicionX = posicionX;
         this.posicionY = posicionY;
         paredes = new boolean[4];
+        vecinos = new boolean[4];
         for (int i = 0; i < 4; i++) {
             paredes[i] = true;
+            vecinos[i] = true;
         }
-        vecinos = new boolean[4];
 
     }
 
@@ -62,12 +63,12 @@ public class Casilla {
      *                  [4] = izquierda
      */
     public void visitarVecino(int direccion){
-        vecinos[direccion] = true;
+        vecinos[direccion] = false;
         paredes[direccion] = false;
         switch (direccion){
             case 0:
                 becinoArriba.estado = true;
-                becinoArriba.vecinos[2] = true;
+                becinoArriba.vecinos[2] = false;
                 becinoArriba.paredes[2] = false;
                 break;
             case 1:
@@ -130,7 +131,7 @@ public class Casilla {
      */
     public boolean hayVecinosSinVisitar(){
         for (int i = 0; i < vecinos.length; i++) {
-            if (!vecinos[i])
+            if (vecinos[i])
                 return true;
         }
         return false;
@@ -199,6 +200,21 @@ public class Casilla {
         }
     }
 
+    public boolean hayVecinoOcupado(int pos){
+        switch (pos){
+            case 0:
+                return becinoArriba.estado;
+            case 1:
+                return becinoDerecho.estado;
+            case 2:
+                return becinoAbajo.estado;
+            case 3:
+                return becinoIzquierdo.estado;
+            default:
+                return false;
+        }
+    }
+
     public Casilla dameVecino(int posicion){
         switch (posicion){
             case 0:
@@ -228,15 +244,26 @@ public class Casilla {
     }
 
     public void configuraleElVecino(int pos){
-        vecinos[pos] = true;
+        vecinos[pos] = false;
     }
 
 
     public ArregloDinamico<Integer> vecinosDisponibles(){
         ArregloDinamico<Integer> disponibles = new ArregloDinamico<>();
         for (int i = 0; i < 4; i++) {
-            if (!vecinos[i]){
-                disponibles.agrega(i);
+            if (vecinos[i]){
+                if (i == 0 && !becinoArriba.estado){
+                    disponibles.agrega(i);
+                }
+                if (i == 1 && !becinoDerecho.estado){
+                    disponibles.agrega(i);
+                }
+                if (i == 2 && !becinoAbajo.estado){
+                    disponibles.agrega(i);
+                }
+                if (i == 3 && !becinoIzquierdo.estado){
+                    disponibles.agrega(i);
+                }
             }
         }
         return disponibles;
