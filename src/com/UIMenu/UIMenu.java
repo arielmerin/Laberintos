@@ -52,13 +52,13 @@ public class UIMenu {
                     do {
                         System.out.println("======================");
                         do {
-                            iniciox = getInt("Ingrese la coordenada en x del inicio","Error, ingrese un valor valido");
-                            inicioy = getInt("Ingrese la coordenada en y del inicio","Error, ingrese un valor valido");
+                            iniciox = getInt("Ingrese la coordenada en y del inicio","Error, ingrese un valor valido");
+                            inicioy = getInt("Ingrese la coordenada en x del inicio","Error, ingrese un valor valido");
                         }while (iniciox >= m || inicioy >= n);
 
                         do {
                             finx = getInt("Ingrese la coordenada en y del final","Error, ingrese un valor valido");
-                            finy = getInt("Ingrese la coordenada en y del final","Error, ingrese un valor valido");
+                            finy = getInt("Ingrese la coordenada en x del final","Error, ingrese un valor valido");
                         }while (finx >= m || finy >= n);
                         System.out.println("======================");
                     }while (iniciox == finx && inicioy == finy );
