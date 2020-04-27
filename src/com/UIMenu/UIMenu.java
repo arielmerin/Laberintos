@@ -23,14 +23,14 @@ public class UIMenu {
     public static void principal(){
         System.out.println(":.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.");
         System.out.println("BIENIDX A los laberitos");
-        System.out.println("Este programa genera (con la opcion 3) laberintos de 30 x 30 mostrando la solucion, \ntambien" +
+        System.out.println("Este programa genera (con la opcion 2) laberintos de 15 x 15 mostrando la solucion, \ntambien" +
                 " puedes asignar el tamaño que gustes (mayor estricto a 1 en ambos valores) y las casillas de inicio y fin");
 
         boolean primeraPregunta = true;
         do {
             System.out.println("[1] Para ingresar valores del laberinto");
-            System.out.println("[2] Para generar automaticamente el laberinto");
-            System.out.println("[0] Para salir del programa");
+            System.out.println("[2] Generar automaticamente el laberinto");
+            System.out.println("[0] Salir del programa");
             int respuesta = getInt("Seleccione una opcion: ", "Error, ingrese una opcion valida");
             switch (respuesta){
                 case 1:
@@ -44,25 +44,35 @@ public class UIMenu {
                     laberinto.crearLaberinto();
                     laberinto.printStringGrid();
                     System.out.format("Laberinto de dimension (%d,%d) con solucion\n\n",n,m);
-                    System.out.println("Para proporcionar las coordenadas recuerde que la primera casilla es (0,0), es decir la primera posicion es 0");
+                    System.out.format("Para proporcionar las coordenadas recuerde que la primera casilla es (0,0), " +
+                            "\nes decir la primera posicion es 0. \tAdemas la maxima posicion es (%d,%d)\n", n-1,m-1);
                     System.out.println("No es valido porporcionar la misma pareja ordenada de inicio que de final, si usted hace eso el programa volvera a pedirle sus datos");
 
-                    int iniciox, inicioy;
-                    int finx, finy;
+                    int iniY = 0, iniX = 0, veces = 0, times = 0;
+                    int finalY =0, finalX = 0;
                     do {
                         System.out.println("======================");
                         do {
-                            iniciox = getInt("Ingrese la coordenada en y del inicio","Error, ingrese un valor valido");
-                            inicioy = getInt("Ingrese la coordenada en x del inicio","Error, ingrese un valor valido");
-                        }while (iniciox >= m || inicioy >= n);
-
+                            if (veces > 0){
+                                System.out.format("Teclee nuevamente los valores para la coordenada de salida pues (%d,%d) no es valida \n",
+                                        iniX, iniY);
+                            }
+                            iniX = getInt("Ingrese la coordenada en x del inicio","Error, ingrese un valor valido");
+                            iniY = getInt("Ingrese la coordenada en y del inicio","Error, ingrese un valor valido");
+                            veces++;
+                        }while (iniY >= m || iniX >= n);
                         do {
-                            finx = getInt("Ingrese la coordenada en y del final","Error, ingrese un valor valido");
-                            finy = getInt("Ingrese la coordenada en x del final","Error, ingrese un valor valido");
-                        }while (finx >= m || finy >= n);
+                            if (times > 0){
+                                System.out.format("Teclee nuevamente los valores para la coordenada de salida pues (%d,%d) no es valida \n",
+                                        finalX, finalY);
+                            }
+                            finalX = getInt("Ingrese la coordenada en x del final","Error, ingrese un valor valido");
+                            finalY = getInt("Ingrese la coordenada en y del final","Error, ingrese un valor valido");
+                            times++;
+                        }while (finalY >= m || finalX >= n);
                         System.out.println("======================");
-                    }while (iniciox == finx && inicioy == finy );
-                    laberinto.hallarSolucion(laberinto.casillas[iniciox][inicioy],laberinto.casillas[finx][finy]);
+                    }while (iniY == finalY && iniX == finalX );
+                    laberinto.hallarSolucion(laberinto.casillas[iniY][iniX],laberinto.casillas[finalY][finalX]);
                     laberinto.printStringGrid();
                     break;
                 case 2:
@@ -73,6 +83,7 @@ public class UIMenu {
                     laberinto1.hallarSolucion(laberinto1.casillas[0][0],laberinto1.casillas[14][14]);
                     System.out.println(" La solucion es  la siguiente");
                     laberinto1.printStringGrid();
+                    break;
                 case 0:
                     System.out.println("Hasta luego ");
                     primeraPregunta = false;
