@@ -72,7 +72,7 @@ public class UIMenu {
                         }while (finalY >= m || finalX >= n);
                         System.out.println("======================");
                     }while (iniY == finalY && iniX == finalX );
-                    laberinto.hallarSolucion(laberinto.casillas[iniY][iniX],laberinto.casillas[finalY][finalX]);
+                    laberinto.hallarSolucion(laberinto.casillas[iniX][iniY],laberinto.casillas[finalX][finalY]);
                     laberinto.printStringGrid();
                     break;
                 case 2:
