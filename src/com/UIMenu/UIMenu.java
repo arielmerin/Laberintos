@@ -36,10 +36,10 @@ public class UIMenu {
                 case 1:
                     int n, m;
                     do{
-                        n = getInt("Ingrese el valor del largo, debe ser mayor que 1 ", "Error, ingrese un valor valido");
-                        m = getInt("Ingrese el valor del ancho, debe ser mayor que 1 ", "Error, ingrese un valor valido");
+                        n = getInt("Ingrese el valor del ancho (horizontal), debe ser mayor que 1 ", "Error, ingrese un valor valido");
+                        m = getInt("Ingrese el valor del largo (vertical), debe ser mayor que 1 ", "Error, ingrese un valor valido");
                     }while (n <= 1 || m <= 1);
-                    Laberinto laberinto = new Laberinto(n,m);
+                    Laberinto laberinto = new Laberinto(m,n);
                     System.out.format("Laberinto de dimension (%d,%d) sin solucion",n,m);
                     laberinto.crearLaberinto();
                     laberinto.printStringGrid();
@@ -72,7 +72,8 @@ public class UIMenu {
                         }while (finalY >= m || finalX >= n);
                         System.out.println("======================");
                     }while (iniY == finalY && iniX == finalX );
-                    laberinto.hallarSolucion(laberinto.casillas[iniX][iniY],laberinto.casillas[finalX][finalY]);
+
+                    laberinto.hallarSolucion(laberinto.casillas[iniY][iniX],laberinto.casillas[finalY][finalX]);
                     laberinto.printStringGrid();
                     break;
                 case 2:

@@ -137,10 +137,15 @@ public class Casilla {
 
     @Override
     public String toString() {
-        if (!estado && orden > 0){
-            return " X ";
-        }else {
-            return "   ";
+        switch (orden){
+            case 1:
+                return " I ";
+            case -1:
+                return  " F ";
+            case 0:
+                return "   ";
+            default:
+                return " X ";
         }
     }
 

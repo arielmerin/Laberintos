@@ -190,8 +190,6 @@ public class Laberinto {
      * <h1> Solucion al laberinto </h1>
      * Se encarga de marcar una trayectoria entre dos casillas dadas para mostrar que hay una solucion al laberinto con
      * dichos valores, hace uso de Colas para su implementacion
-     * @param inicio Casilla donde de iniciara el recorrido
-     * @param fin Casilla donde se termina el recorrido
      */
     public void hallarSolucion(Casilla inicio, Casilla fin){
         Cola<Casilla> cola = new Cola<>();
@@ -224,5 +222,8 @@ public class Laberinto {
             posicion.setOrden(++i);
             posicion = posicion.getQuienMeEncolo();
         }
+        fin.setOrden(-1);
+        inicio.setOrden(1);
     }
+
 }
